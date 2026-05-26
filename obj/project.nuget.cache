@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "KnxMKI0WcYA=",
+  "success": true,
+  "projectFilePath": "D:\\OneDrive - King Faisal University\\Desktop\\NewProject2\\ComprehensiveBlazorApp\\ComprehensiveBlazorApp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\PC\\.nuget\\packages\\microsoft.aspnetcore.app.internal.assets\\10.0.8\\microsoft.aspnetcore.app.internal.assets.10.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}
