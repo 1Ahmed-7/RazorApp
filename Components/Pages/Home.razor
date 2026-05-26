@@ -1,0 +1,33 @@
+﻿@page "/"
+@inject IStudentService StudentService
+
+<PageTitle>Home</PageTitle>
+
+<h1>Dashboard</h1>
+
+@if (_students is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <p>Total students: <strong>@_students.Count</strong></p>
+    <p>Average GPA: <strong>@_students.Average(s => s.Gpa).ToString("0.00")</strong></p>
+
+    <h4>Top Students</h4>
+    <ul>
+        @foreach (var student in _students.OrderByDescending(s => s.Gpa).Take(3))
+        {
+            <li>@student.Name (@student.Gpa)</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<Student>? _students;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _students = await StudentService.GetAllAsync();
+    }
+}

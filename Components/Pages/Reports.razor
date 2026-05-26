@@ -1,0 +1,49 @@
+@page "/reports"
+@inject IStudentService StudentService
+
+<PageTitle>Reports</PageTitle>
+<h1>Reports</h1>
+
+@if (_students is null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (_students.Count == 0)
+{
+    <p>No data available.</p>
+}
+else
+{
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Total Students</h5>
+                <p class="fs-4">@_students.Count</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>Average GPA</h5>
+                <p class="fs-4">@AverageGpa.ToString("0.00")</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3">
+                <h5>High Achievers (>= 3.5)</h5>
+                <p class="fs-4">@HighAchievers</p>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private List<Student>? _students;
+
+    private double AverageGpa => _students?.Average(s => s.Gpa) ?? 0;
+    private int HighAchievers => _students?.Count(s => s.Gpa >= 3.5) ?? 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _students = await StudentService.GetAllAsync();
+    }
+}
